@@ -11,6 +11,7 @@ public class ArbolB {
     }
 
 
+    // TODO: Completar Método para convertir un arbol-n a arbol binario
     public static ArbolB createBinaryTree(Arbol arbol) {
 
         return null;
