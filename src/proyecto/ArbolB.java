@@ -77,7 +77,7 @@ public class ArbolB {
 
         }
 
-        private NodeB<E> root;
+        private final NodeB<E> root;
 
         public Prueba(Tree<E> tree) {
             root = new NodeB<>(tree.getRoot());
@@ -127,7 +127,7 @@ public class ArbolB {
 
         static class NodeB<E> {
 
-            private E e;
+            private final E e;
 
             private NodeB<E> left, right;
 
@@ -135,24 +135,8 @@ public class ArbolB {
                 this.e = node.getE();
             }
 
-            public E getE() {
-                return e;
-            }
-
-            public void setE(E e) {
-                this.e = e;
-            }
-
-            public NodeB<E> getLeft() {
-                return left;
-            }
-
             public void setLeft(NodeB<E> left) {
                 this.left = left;
-            }
-
-            public NodeB<E> getRight() {
-                return right;
             }
 
             public void setRight(NodeB<E> right) {
@@ -175,20 +159,10 @@ public class ArbolB {
             }
         }
 
-        static class Tree<E> {
-
-            private Node<E> root;
-
-            public Tree(Node<E> root) {
-                this.root = root;
-            }
+        record Tree<E>(Node<E> root) {
 
             public Node<E> getRoot() {
                 return root;
-            }
-
-            public void setRoot(Node<E> root) {
-                this.root = root;
             }
 
             @Override
@@ -199,7 +173,7 @@ public class ArbolB {
 
         static class Node<E> {
 
-            private E e;
+            private final E e;
             private final LinkedList<Node<E>> hijos;
 
             public Node(E e) {
@@ -219,10 +193,6 @@ public class ArbolB {
 
             public E getE() {
                 return e;
-            }
-
-            public void setE(E e) {
-                this.e = e;
             }
 
             @Override
