@@ -21,6 +21,7 @@ public class NodoB {
         this.right = right;
     }
 
+
 //    public void inOrder() {
 //        if (left != null) {
 //            left.inOrder();
