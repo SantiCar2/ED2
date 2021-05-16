@@ -7,22 +7,61 @@ public class NodoB {
 
     private short objetivo;
 
-    private NodoB left, right;
+    private NodoB hijoIzq, hijoDer, padre;
 
     public NodoB(Nodo node) {
         // TODO: info del nodo
     }
 
-    public void setLeft(NodoB left) {
-        this.left = left;
+    public NodoB(NodoB padre, NodoB hijoIzq, NodoB hijoDer) {
+        this.padre=padre;
+        this.hijoIzq=hijoIzq;
+        this.hijoDer=hijoDer;
     }
 
-    public void setRight(NodoB right) {
-        this.right = right;
+    public Jarra getJar1() {
+        return jar1;
+    }
+    public void setJar1(Jarra jar1) {
+        this.jar1 = jar1;
     }
 
+    public Jarra getJar2() {
+        return jar2;
+    }
+    public void setJar2(Jarra jar2) {
+        this.jar2 = jar2;
+    }
 
-//    public void inOrder() {
+    public short getObjetivo() {
+        return objetivo;
+    }
+    public void setObjetivo(short objetivo) {
+        this.objetivo = objetivo;
+    }
+
+    public void setHijoIzq(NodoB hijoIzq) {
+        this.hijoIzq = hijoIzq;
+    }
+    public NodoB getHijoIzq() {
+        return hijoIzq;
+    }
+
+    public void setHijoDer(NodoB hijoDer) {
+        this.hijoDer = hijoDer;
+    }
+    public NodoB getHijoDer() {
+        return hijoDer;
+    }
+
+    public NodoB getPadre() {
+        return padre;
+    }
+    public void setPadre(NodoB padre) {
+        this.padre = padre;
+    }
+
+    //    public void inOrder() {
 //        if (left != null) {
 //            left.inOrder();
 //        }
