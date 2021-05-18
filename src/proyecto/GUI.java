@@ -1,13 +1,9 @@
 package proyecto;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUI {
 
@@ -48,13 +44,13 @@ public class GUI {
 		frmEd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEd.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Capacidad jarra 1");
-		lblNewLabel.setBounds(12, 12, 111, 16);
-		frmEd.getContentPane().add(lblNewLabel);
+		JLabel jarra_1_lbl = new JLabel("Capacidad jarra 1");
+		jarra_1_lbl.setBounds(12, 12, 111, 16);
+		frmEd.getContentPane().add(jarra_1_lbl);
 		
-		JLabel lblCapacidadJarra = new JLabel("Capacidad jarra 2");
-		lblCapacidadJarra.setBounds(186, 12, 111, 16);
-		frmEd.getContentPane().add(lblCapacidadJarra);
+		JLabel jarra_2_lbl = new JLabel("Capacidad jarra 2");
+		jarra_2_lbl.setBounds(186, 12, 111, 16);
+		frmEd.getContentPane().add(jarra_2_lbl);
 		
 		textField = new JTextField();
 		textField.setBounds(12, 40, 111, 20);
@@ -68,15 +64,22 @@ public class GUI {
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setLineWrap(true);
+		textArea.setEditable(false);
 		textArea.setBounds(12, 140, 445, 344);
 		frmEd.getContentPane().add(textArea);
 		
-		JButton btnNewButton = new JButton("Calcular");
-		btnNewButton.setBounds(359, 40, 98, 20);
-		frmEd.getContentPane().add(btnNewButton);
+		JButton calcularBtn = new JButton("Calcular");
+		calcularBtn.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				textArea.setText("Hola");
+			}
+		});
+		calcularBtn.setBounds(359, 40, 98, 20);
+		frmEd.getContentPane().add(calcularBtn);
 		
-		JLabel lblResultado = new JLabel("Resultado");
-		lblResultado.setBounds(12, 112, 111, 16);
-		frmEd.getContentPane().add(lblResultado);
+		JLabel resultado_lbl = new JLabel("Resultado");
+		resultado_lbl.setBounds(12, 112, 111, 16);
+		frmEd.getContentPane().add(resultado_lbl);
 	}
 }
