@@ -44,7 +44,7 @@ public class ArbolB {
 /*
 class OriginTreeB {
 
-    private short objetivo;
+     private short objetivo;
 
     private proyecto_solo.v1.NodoB root;
 
