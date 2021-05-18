@@ -4,47 +4,88 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class ArbolB {
-//
-//    private short objetivo;
-//
-//    private proyecto_solo.NodoB root;
-//
-//    public ArbolB(Arbol tree) {
-//        objetivo = tree.getObjetivo();
-//
-//        root = new proyecto_solo.NodoB(tree.getRoot());
-//        fillLeft(root,tree.getRoot().getHijos().listIterator());
-//    }
-//    private void fillLeft(proyecto_solo.NodoB nodeA, Iterator<proyecto_solo.Nodo> hijosNodeA) {
-//        if (!hijosNodeA.hasNext()) {
-//            return;
-//        }
-//        var nodTemp = hijosNodeA.next();
-//        var nodoB = new proyecto_solo.NodoB(nodTemp);
-//        // son el 'mismo' Nodo
-//
-//        nodeA.setNodoIzquierda(nodoB);
-//
-//        fillLeft(nodoB, nodTemp.getHijos().listIterator());
-//
-//        if (hijosNodeA.hasNext()) {
-//            fillRight(nodoB, hijosNodeA);
-//        }
-//    }
-//
-//    private void fillRight(proyecto_solo.NodoB node, Iterator<Nodo> iterator) {
-//        if (!iterator.hasNext()){
-//            return;
-//        }
-//        var nodTemp = iterator.next();
-//        var nodeF = new NodoB(nodTemp);
-//
-//        node.setNodoDerecha(nodeF);
-//
-//        fillLeft(nodeF, nodTemp.getHijos().listIterator());
-//        fillRight(nodeF, iterator);
-//
-//    }
+
+    private NodoB root;
+
+    public ArbolB(Arbol tree) {
+        this.root = new NodoB(tree.getRaiz());
+        fillLeft(root, tree.getRaiz().getHijos().listIterator());
+    }
+
+    private void fillLeft(NodoB nodeA, Iterator<Nodo> hijosNodeA) {
+        if (!hijosNodeA.hasNext()) {
+            return;
+        }
+        Nodo nodTemp = hijosNodeA.next();
+        NodoB nodeB = new NodoB(nodTemp);
+
+        nodeA.setHijoIzq(nodeB);
+
+        fillLeft(nodeB, nodTemp.getHijos().listIterator());
+        if (hijosNodeA.hasNext()) {
+            fillRight(nodeB, hijosNodeA);
+        }
+    }
+
+    private void fillRight(NodoB node, Iterator<Nodo> iterator) {
+        if (!iterator.hasNext()) {
+            return;
+        }
+        Nodo nodTemp = iterator.next();;
+        NodoB nodeF = new NodoB(nodTemp);
+
+        node.setHijoDer(nodeF);
+
+        fillLeft(nodeF, nodTemp.getHijos().listIterator());
+        fillRight(nodeF, iterator);
+    }
+
+
+/*
+class OriginTreeB {
+
+    private short objetivo;
+
+    private proyecto_solo.v1.NodoB root;
+
+    public ArbolB(Arbol tree) {
+        objetivo = tree.getObjetivo();
+
+        root = new proyecto_solo.v1.NodoB(tree.getRaiz());
+        fillLeft(root, tree.getRaiz().getHijos().listIterator());
+    }
+
+    private void fillLeft(proyecto_solo.v1.NodoB nodeA, Iterator<proyecto_solo.Nodo> hijosNodeA) {
+        if (!hijosNodeA.hasNext()) {
+            return;
+        }
+        var nodTemp = hijosNodeA.next();
+        var nodoB = new proyecto_solo.v1.NodoB(nodTemp);
+        // son el 'mismo' Nodo
+
+        nodeA.setNodoIzquierda(nodoB);
+
+        fillLeft(nodoB, nodTemp.getHijos().listIterator());
+
+        if (hijosNodeA.hasNext()) {
+            fillRight(nodoB, hijosNodeA);
+        }
+    }
+
+    private void fillRight(proyecto_solo.v1.NodoB node, Iterator<Nodo> iterator) {
+        if (!iterator.hasNext()) {
+            return;
+        }
+        var nodTemp = iterator.next();
+        var nodeF = new NodoB(nodTemp);
+
+        node.setNodoDerecha(nodeF);
+
+        fillLeft(nodeF, nodTemp.getHijos().listIterator());
+        fillRight(nodeF, iterator);
+
+    }
+*/
 
 
     private static class Prueba<E> {
