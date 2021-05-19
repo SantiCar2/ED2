@@ -61,19 +61,9 @@ public class Nodo {
                 }
                 break;
             case "AtoB":
-                if(A.getContent()!=0&&B.getContent()!=B.getCapacidad()){
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                return A.getContent() != 0 && B.getContent() != B.getCapacidad();
             case "BtoA":
-                if(B.getContent()!=0&&A.getContent()!=A.getCapacidad()){
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                return B.getContent() != 0 && A.getContent() != A.getCapacidad();
 
         }
         return false;
