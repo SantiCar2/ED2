@@ -7,6 +7,7 @@ import static proyecto.JarraExceptions.*;
 
 public class Nodo {
 
+    private static boolean completo = false;
     private short objetivo;
     private Jarra jarra1;
     private Jarra jarra2;
@@ -14,38 +15,41 @@ public class Nodo {
     private final ArrayList<Nodo> hijos = new ArrayList<>();
 
 
-    public boolean VerificarOperaciones(String op, Jarra A, Jarra B) throws JarraVaciaE, JarraLlenaE {
-        switch (op) {
-            case "vaciarA":
-                if (A.getContent() > 0) {
-                    return true;
-                } else {
-                    throw new JarraVaciaE();
-                }
-            case "vaciarB":
-                if (B.getContent() > 0) {
-                    return true;
-                } else {
-                    throw new JarraVaciaE();
-                }
-            case "llenaA":
-                if (A.getContent() != A.getCapacidad()) {
-                    return true;
-                } else {
-                    throw new JarraLlenaE();
-                }
-            case "llenarB":
-                if (B.getContent() != B.getCapacidad()) {
-                    B.setContent(B.getCapacidad());
-                } else {
-                    throw new JarraLlenaE();
-                }
-                break;
-            case "AtoB":
-                return A.getContent() != 0 && B.getContent() != B.getCapacidad();
-            case "BtoA":
-                return B.getContent() != 0 && A.getContent() != A.getCapacidad();
+    public boolean VerificarOperaciones (String op, Jarra A, Jarra B) throws JarraVaciaE, JarraLlenaE {
+        if(A.getContent() == objetivo && B.getContent() == objetivo) completo = true;
+        if(!completo){
+            switch (op) {
+                case "vaciarA":
+                    if (A.getContent() > 0) {
+                        return true;
+                    } else {
+                        throw new JarraVaciaE();
+                    }
+                case "vaciarB":
+                    if (B.getContent() > 0) {
+                        return true;
+                    } else {
+                        throw new JarraVaciaE();
+                    }
+                case "llenaA":
+                    if (A.getContent() != A.getCapacidad()) {
+                        return true;
+                    } else {
+                        throw new JarraLlenaE();
+                    }
+                case "llenarB":
+                    if (B.getContent() != B.getCapacidad()) {
+                        B.setContent(B.getCapacidad());
+                    } else {
+                        throw new JarraLlenaE();
+                    }
+                    break;
+                case "AtoB":
+                    return A.getContent() != 0 && B.getContent() != B.getCapacidad();
+                case "BtoA":
+                    return B.getContent() != 0 && A.getContent() != A.getCapacidad();
 
+            }
         }
         return false;
     }
