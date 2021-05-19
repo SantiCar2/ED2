@@ -1,5 +1,5 @@
 package proyecto;
-
+import java.util.ArrayList;
 public class Nodo {
 
     private short objetivo;
@@ -8,17 +8,17 @@ public class Nodo {
     private Nodo padre;
     ArrayList<Nodo> hijos = new ArrayList<>();
     public Jarra getJar1() {
-        return jar1;
+        return jarra1;
     }
     public void setJar1(Jarra jar1) {
-        this.jar1 = jar1;
+        this.jarra1 = jar1;
     }
 
     public Jarra getJar2() {
-        return jar2;
+        return jarra2;
     }
     public void setJar2(Jarra jar2) {
-        this.jar2 = jar2;
+        this.jarra2 = jar2;
     }
 
     public short getObjetivo() {
@@ -37,7 +37,6 @@ public class Nodo {
                 }
                 else{
                     throw new JarraVaciaE();
-                    return false;
                 }
             case "vaciarB":
                 if(B.getContent()>0){
@@ -45,7 +44,6 @@ public class Nodo {
                 }
                 else{
                     throw new JarraVaciaE();
-                    return false;
                 }
             case "llenaA":
                 if(A.getContent()!=A.getCapacidad()){
@@ -53,7 +51,6 @@ public class Nodo {
                 }
                 else{
                     throw new JarraLlenaE();
-                    return false;
                 }
             case "llenarB":
                 if(B.getContent()!=B.getCapacidad()){
@@ -61,23 +58,26 @@ public class Nodo {
                 }
                 else{
                     throw new JarraLlenaE();
-                    return false;
                 }
+                break;
             case "AtoB":
                 if(A.getContent()!=0&&B.getContent()!=B.getCapacidad()){
                     return true;
                 }
                 else{
-
+                    return false;
                 }
             case "BtoA":
                 if(B.getContent()!=0&&A.getContent()!=A.getCapacidad()){
                     return true;
                 }
                 else{
-
+                    return false;
                 }
+
         }
+        return false;
+
 
     }
 
