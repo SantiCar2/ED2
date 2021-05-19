@@ -22,6 +22,8 @@ public class Nodo {
         this.padre = padre;
 
         this.estado = "(" + jarra1.getContent() + ", " + jarra2.getContent() + ")";
+        //Agregar estado a la lista de casos analizados
+
     }
 
     //TODO VERIFICAR OPERACIONES YA HECHAS
@@ -31,34 +33,44 @@ public class Nodo {
         if (!completo) {
             switch (op) {
                 case "vaciarA":
-                    if (A.getContent() > 0) {
+                    String temp = "(" + 0 + ", " + B.getContent() + ")";
+                    if (A.getContent() > 0) { //A la condicion agregar verificacion de casos analizados
                         return true;
                     } else {
                         throw new JarraVaciaE();
                     }
                 case "vaciarB":
-                    if (B.getContent() > 0) {
+                    String temp1 = "(" + A.getContent() + ", " + 0 + ")";
+                    if (B.getContent() > 0) { //A la condicion agregar verificacion de casos analizados
                         return true;
                     } else {
                         throw new JarraVaciaE();
                     }
                 case "llenaA":
-                    if (A.getContent() != A.getCapacidad()) {
+                    String temp2 = "(" + A.getCapacidad() + ", " + B.getContent() + ")";
+                    if (A.getContent() != A.getCapacidad()) { //A la condicion agregar verificacion de casos analizados
                         return true;
                     } else {
                         throw new JarraLlenaE();
                     }
                 case "llenarB":
-                    if (B.getContent() != B.getCapacidad()) {
+                    String temp3 = "(" + A.getContent() + ", " + B.getCapacidad() + ")";
+                    if (B.getContent() != B.getCapacidad()) { //A la condicion agregar verificacion de casos analizados
                         B.setContent(B.getCapacidad());
                     } else {
                         throw new JarraLlenaE();
                     }
                     break;
                 case "AtoB":
-                    return A.getContent() != 0 && B.getContent() != B.getCapacidad();
+                    int t = A.getContent() - (B.getCapacidad() - B.getContent());
+                    int t2; if(A.getContent() + B.getContent() > B.getCapacidad()) t2 = B.getCapacidad(); else t2 = A.getContent() + B.getContent();
+                    String temp4 = "(" + t + ", " + t2 + ")";
+                    return A.getContent() != 0 && B.getContent() != B.getCapacidad(); //A la condicion agregar verificacion de casos analizados
                 case "BtoA":
-                    return B.getContent() != 0 && A.getContent() != A.getCapacidad();
+                    int t0 = B.getContent() - (A.getCapacidad() - A.getContent());
+                    int t02; if(B.getContent() + A.getContent() > A.getCapacidad()) t02 = A.getCapacidad(); else t02 = B.getContent() + A.getContent();
+                    String temp5 = "(" + t0 + ", " + t02 + ")";
+                    return B.getContent() != 0 && A.getContent() != A.getCapacidad(); //A la condicion agregar verificacion de casos analizados
 
             }
         }
