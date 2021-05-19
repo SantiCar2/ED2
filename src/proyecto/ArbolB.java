@@ -31,7 +31,7 @@ public class ArbolB {
         if (!iterator.hasNext()) {
             return;
         }
-        Nodo nodTemp = iterator.next();;
+        Nodo nodTemp = iterator.next();
         NodoB nodeF = new NodoB(nodTemp);
 
         node.setHijoDer(nodeF);
@@ -39,6 +39,10 @@ public class ArbolB {
         fillLeft(nodeF, nodTemp.getHijos().listIterator());
         fillRight(nodeF, iterator);
     }
+
+    // TODO: Buscar el camino a la respuesta
+
+
 
 
 /*

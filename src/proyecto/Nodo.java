@@ -26,9 +26,9 @@ public class Nodo {
 
     //TODO VERIFICAR OPERACIONES YA HECHAS
 
-    public boolean VerificarOperaciones (String op, Jarra A, Jarra B) throws JarraVaciaE, JarraLlenaE {
-        if(A.getContent() == objetivo && B.getContent() == objetivo) completo = true;
-        if(!completo){
+    public boolean VerificarOperaciones(String op, Jarra A, Jarra B) throws JarraVaciaE, JarraLlenaE {
+        if (A.getContent() == objetivo && B.getContent() == objetivo) completo = true;
+        if (!completo) {
             switch (op) {
                 case "vaciarA":
                     if (A.getContent() > 0) {
@@ -101,7 +101,11 @@ public class Nodo {
         return hijos;
     }
 
-    public String getEstado(){
-        return  this.estado;
+    public String getEstado() {
+        return this.estado;
+    }
+
+    public static boolean isCompleto() {
+        return completo;
     }
 }
