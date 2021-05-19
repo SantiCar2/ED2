@@ -23,7 +23,6 @@ public class Nodo {
 
         this.estado = "(" + jarra1.getContent() + ", " + jarra2.getContent() + ")";
         //Agregar estado a la lista de casos analizados
-
     }
 
     //TODO VERIFICAR OPERACIONES YA HECHAS
