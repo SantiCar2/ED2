@@ -8,12 +8,23 @@ import static proyecto.JarraExceptions.*;
 public class Nodo {
 
     private static boolean completo = false;
+    private final String estado;
     private short objetivo;
     private Jarra jarra1;
     private Jarra jarra2;
     private Nodo padre;
     private final ArrayList<Nodo> hijos = new ArrayList<>();
 
+    public Nodo(short objetivo, Jarra jarra1, Jarra jarra2, Nodo padre) {
+        this.objetivo = objetivo;
+        this.jarra1 = jarra1;
+        this.jarra2 = jarra2;
+        this.padre = padre;
+
+        this.estado = "(" + jarra1.getContent() + ", " + jarra2.getContent() + ")";
+    }
+
+    //TODO VERIFICAR OPERACIONES YA HECHAS
 
     public boolean VerificarOperaciones (String op, Jarra A, Jarra B) throws JarraVaciaE, JarraLlenaE {
         if(A.getContent() == objetivo && B.getContent() == objetivo) completo = true;
@@ -88,5 +99,9 @@ public class Nodo {
 
     public ArrayList<Nodo> getHijos() {
         return hijos;
+    }
+
+    public String getEstado(){
+        return  this.estado;
     }
 }
