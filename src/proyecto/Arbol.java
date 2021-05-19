@@ -2,20 +2,20 @@ package proyecto;
 
 public class Arbol {
 
-    private Nodo root;
+    private Nodo raiz;
     private final short objetivo;
 
     public Arbol(Nodo root, short objetivo) {
-        this.root = root;
+        this.raiz = root;
         this.objetivo = objetivo;
     }
 
-    public Nodo getRoot() {
-        return root;
+    public Nodo getRaiz() {
+        return raiz;
     }
 
-    public void setRoot(Nodo root) {
-        this.root = root;
+    public void setRaiz(Nodo raiz) {
+        this.raiz = raiz;
     }
 
     public short getObjetivo() {
