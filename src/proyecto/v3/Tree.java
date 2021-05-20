@@ -192,7 +192,6 @@ public class Tree {
             x0 + d = xf --> xf = x0 + y0
             :: yf = 0, xF = x0 + y0
              */
-
             final int tX, tY;
 
             if (y != 0 && x != xCapacity) {

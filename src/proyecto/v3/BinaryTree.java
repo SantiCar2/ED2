@@ -41,7 +41,6 @@ public class BinaryTree {
         fillLeft(nodeF, nodTemp.getChildren().listIterator());
         fillRight(nodeF, iterator);
     }
-
 }
 
 class BinaryNode {
