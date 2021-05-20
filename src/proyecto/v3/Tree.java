@@ -33,7 +33,6 @@ public class Tree {
     }
 
 
-
     class Node {
         private final String state;// representation of node
         private final boolean answer;
@@ -67,60 +66,66 @@ public class Tree {
             // createYtoX();
             // createEmptyX();
             // createEmptyY();
-            // TODO: Replace Switch statement with enhanced 'switch'
+
+            /*NO MODIFICAR*/
             switch (operation) {
-                case -1:
+                case -1 -> {
                     createFilledX();
                     createFilledY();
                     createXtoY();
                     createYtoX();
                     createEmptyX();
                     createEmptyY();
-                    break;
-                case 0: // filled x
+                }
+                // filled x
+                case 0 -> {
                     createFilledY();
                     createXtoY();
                     createYtoX();
                     createEmptyX();
                     createEmptyY();
-                    break;
-                case 1: // filled y
+                }
+                // filled y
+                case 1 -> {
                     createFilledX();
                     createXtoY();
                     createYtoX();
                     createEmptyX();
                     createEmptyY();
-                    break;
-                case 2: // x to y
+                }
+                // x to y
+                case 2 -> {
                     createFilledX();
                     createFilledY();
                     createYtoX();
                     createEmptyX();
                     createEmptyY();
-                    break;
-                case 3: // y to x
+                }
+                // y to x
+                case 3 -> {
                     createFilledX();
                     createFilledY();
                     createXtoY();
                     createEmptyX();
                     createEmptyY();
-                    break;
-                case 4: // empty x
+                }
+                // empty x
+                case 4 -> {
                     createFilledX();
                     createFilledY();
                     createXtoY();
                     createYtoX();
                     createEmptyY();
-                    break;
-                case 5: // empty y
+                }
+                // empty y
+                case 5 -> {
                     createFilledX();
                     createFilledY();
                     createXtoY();
                     createYtoX();
                     createEmptyX();
-                    break;
-                default:
-                    throw new UnsupportedOperationException("Value " + operation + "not recognized. Default switch operation not supported");
+                }
+                default -> throw new UnsupportedOperationException("Value " + operation + "not recognized. Default switch operation not supported");
             }
         }
 
