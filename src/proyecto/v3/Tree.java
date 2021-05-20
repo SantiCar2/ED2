@@ -9,6 +9,7 @@ public class Tree {
     public final int objective;
     private final int xCapacity;
     private final int yCapacity;
+    private final int limit;
 
     private Node root;
 
@@ -16,6 +17,9 @@ public class Tree {
         this.objective = objective;
         this.xCapacity = xCapacity;
         this.yCapacity = yCapacity;
+        this.limit = xCapacity * yCapacity;
+
+        start();
     }
 
     public static void main(String[] args) {
@@ -25,21 +29,26 @@ public class Tree {
     }
 
     private void start() {
-        root = new Node(0, 0, -1, "Root");
+        root = new Node(0, 0, -1, "Root", 0);
     }
+
+
 
     class Node {
         private final String state;// representation of node
         private final boolean answer;
         private final LinkedList<Node> children = new LinkedList<>();
         private final int x, y;// current 'water' levels
+        private final int n;
 
-        public Node(int x, int y, int operation, String fatherState) {
+        public Node(int x, int y, int operation, String fatherState, int n) {
             this.x = x;
             this.y = y;
+            this.n = n;
             this.state = "(" + x + " , " + y + ")";
 
-            if (set.add(state + "," + fatherState)) {
+
+            if (n < limit && set.add(state + "," + fatherState)) {
                 if (!(x == objective || y == objective)) {
                     answer = false;
                     createChildren(operation);
@@ -119,14 +128,14 @@ public class Tree {
         private void createFilledX() {
             final int op = 0;
             if (x != xCapacity) {
-                children.offer(new Node(xCapacity, y, op, state));
+                children.offer(new Node(xCapacity, y, op, state, n + 1));
             }
         }
 
         private void createFilledY() {
             final int op = 1;
             if (y != yCapacity) {
-                children.offer(new Node(x, yCapacity, op, state));
+                children.offer(new Node(x, yCapacity, op, state, n + 1));
             }
         }
 
@@ -160,7 +169,7 @@ public class Tree {
                     tY = y + x;
                 }
 
-                children.offer(new Node(tX, tY, op, state));
+                children.offer(new Node(tX, tY, op, state, n + 1));
             }
         }
 
@@ -191,7 +200,7 @@ public class Tree {
                     tY = 0;
                     tX = x + y;
                 }
-                children.offer(new Node(tX, tY, op, state));
+                children.offer(new Node(tX, tY, op, state, n + 1));
             }
 
         }
@@ -199,14 +208,14 @@ public class Tree {
         private void createEmptyX() {
             final int op = 4;
             if (x != 0) {
-                children.offer(new Node(0, y, op, state));
+                children.offer(new Node(0, y, op, state, n + 1));
             }
         }
 
         private void createEmptyY() {
             final int op = 5;
             if (y != 0) {
-                children.offer(new Node(x, 0, op, state));
+                children.offer(new Node(x, 0, op, state, n + 1));
             }
         }
 
@@ -239,10 +248,38 @@ public class Tree {
             return answer;
         }
 
+        public int getN() {
+            return n;
+        }
+
         @Override
         public String toString() {
             return state;
         }
+    }
+
+    public Set<String> getSet() {
+        return set;
+    }
+
+    public int getObjective() {
+        return objective;
+    }
+
+    public int getxCapacity() {
+        return xCapacity;
+    }
+
+    public int getyCapacity() {
+        return yCapacity;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public Node getRoot() {
+        return root;
     }
 
 }
