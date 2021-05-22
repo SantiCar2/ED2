@@ -17,16 +17,11 @@ public class Tree {
         this.objective = objective;
         this.xCapacity = xCapacity;
         this.yCapacity = yCapacity;
-        this.limit = xCapacity * yCapacity;
+        this.limit = 2*(xCapacity * yCapacity);
 
         start();
     }
 
-    public static void main(String[] args) {
-        Tree t = new Tree(2, 6, 2);
-
-        t.start();
-    }
 
     private void start() {
         root = new Node(0, 0, -1, "Root", 0);
@@ -47,15 +42,13 @@ public class Tree {
             this.state = "(" + x + " , " + y + ")";
 
 
-            if (n < limit && set.add(state + "," + fatherState)) {
+            if (n < limit && set.add(state)) {
                 if (!(x == objective || y == objective)) {
                     answer = false;
 
                     createChildren(operation);
                 } else {
                     answer = true;
-                    System.out.println(state);
-                    System.out.println("RESPUESTA!");
                 }
             } else {
                 answer = false;

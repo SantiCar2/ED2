@@ -1,9 +1,13 @@
 package proyecto;
 
+import proyecto.v3.BinaryTree;
+import proyecto.v3.Tree;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class GUI {
 
@@ -11,6 +15,7 @@ public class GUI {
     private JTextField jarra1;
     private JTextField jarra2;
     private JTextField objetivo;
+    private String ret = "";
 
     /**
      * Launch the application.
@@ -74,7 +79,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!jarra1.getText().isEmpty() && !jarra2.getText().isEmpty() && !objetivo.getText().isEmpty()) {
-                    if (jarra1.getText().matches("//d+") && jarra2.getText().matches("//d+") && objetivo.getText().matches("//d+")) {
+                    if (jarra1.getText().matches("\\d+") && jarra2.getText().matches("\\d+") && objetivo.getText().matches("\\d+")) {
                         /*try {
                             Short jar1 = Short.parseShort(jarra1.getText());
                             Short jar2 = Short.parseShort(jarra2.getText());
@@ -87,11 +92,21 @@ public class GUI {
                             objetivo.setText(null);
                             res.setText(null);
                         }*/
+
+
                         short jar1 = Short.parseShort(jarra1.getText());
                         short jar2 = Short.parseShort(jarra2.getText());
                         short obje = Short.parseShort(objetivo.getText());
                         // TODO: Crear arbol y pasar los parametros
+                        Tree t = new Tree(obje, jar1, jar2);
 
+                        BinaryTree bt = new BinaryTree(t);
+
+                        getAns(bt);
+
+                        res.setText(ret);
+
+                        ret = "";
 
                     } else {
                         JOptionPane.showMessageDialog(frame, "Los valores ingresados no son N" + (char) 218 + "meros.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -124,4 +139,61 @@ public class GUI {
         objetivo_lbl.setBounds(254, 12, 111, 16);
         frame.getContentPane().add(objetivo_lbl);
     }
+
+    private void getAns(BinaryTree bt) {
+        int bestN = 2147483647;
+        BinaryTree.BinaryNode bestAns = null;
+        ArrayList<BinaryTree.BinaryNode> ans = new ArrayList<BinaryTree.BinaryNode>();
+        getAns(bt.getRoot(), ans);
+        if (ans.isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "Los valores ingresados no otorgan una respuesta", "", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (BinaryTree.BinaryNode bn: ans) {
+                if (bn.getN() < bestN) {
+                    bestN = bn.getN();
+                    bestAns = bn;
+                }
+            }
+            llenarOp(bestAns, bestAns.getN());
+            ret = ret + "\n" + bestAns.getState() + bestAns.getN();
+        }
+    }
+
+    private void getAns(BinaryTree.BinaryNode bn, ArrayList ar) {
+        if (bn != null && bn.isAnswer()) {
+            ar.add(bn);
+            System.out.println(bn.toString());
+            System.out.println(bn.getN());
+        }
+        if (bn != null) {
+            getAns(bn.getRight(), ar);
+            getAns(bn.getLeft(), ar);
+        }
+    }
+
+    private void llenarOp(BinaryTree.BinaryNode node, int bestN) {
+        if (node.getParent() == null) {
+            return;
+        }
+        BinaryTree.BinaryNode next = node;
+        boolean trueParent = false;
+        int cont = 0;
+        while (!trueParent && cont < 10) {
+            next = next.getParent();
+            System.out.println(next.toString() + next.getN());
+            try {
+                if (next.getN() != next.getParent().getN()) {
+                    trueParent = true;
+                    if(next.getN() != bestN) ret = next.getParent().getState() + (next.getParent().getN()) + "\n" + ret;
+                }
+            } catch (Exception e) {
+                trueParent = true;
+            }
+
+            cont++;
+        }
+        llenarOp(next, bestN);
+
+    }
+
 }

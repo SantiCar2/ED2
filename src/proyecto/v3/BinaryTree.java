@@ -11,7 +11,7 @@ public class BinaryTree {
         fillLeft(root, tree.getRoot().getChildren().listIterator());
     }
 
-    private void fillLeft(BinaryNode nodeA, Iterator<Tree.Node> hijosNodeA){
+    private void fillLeft(BinaryNode nodeA, Iterator<Tree.Node> hijosNodeA) {
         if (!hijosNodeA.hasNext()) {
             return;
         }
@@ -41,67 +41,83 @@ public class BinaryTree {
         fillLeft(nodeF, nodTemp.getChildren().listIterator());
         fillRight(nodeF, iterator);
     }
+
+    public BinaryNode getRoot() {
+        return root;
+    }
+
+    public static class BinaryNode {
+
+        private final String state;
+        private final boolean answer;
+        private final int n;
+
+        private BinaryNode left, right, parent;
+
+        public BinaryNode(Tree.Node node) {
+            this.state = node.getState();
+            this.answer = node.isAnswer();
+            this.n = node.getN();
+        }
+
+        public String getState() {
+            return state;
+        }
+
+        public String inOrder() {
+            String s = "";
+            if (left != null) {
+                s += left.inOrder();
+            }
+            s += " , ";
+            System.out.println(state + " , ");
+            if (right != null) {
+                s += right.inOrder();
+            }
+            return s;
+        }
+
+        @Override
+        public String toString() {
+            return state;
+        }
+
+        public boolean isAnswer() {
+            return answer;
+        }
+
+        public BinaryNode getLeft() {
+            return left;
+        }
+
+        public void setLeft(BinaryNode left) {
+            this.left = left;
+            left.setParent(this);
+        }
+
+        public BinaryNode getRight() {
+            return right;
+        }
+
+        public void setRight(BinaryNode right) {
+            this.right = right;
+            right.setParent(this);
+        }
+
+        public BinaryNode getParent() {
+            return parent;
+        }
+
+        public void setParent(BinaryNode parent) {
+            this.parent = parent;
+        }
+
+        public int getN() {
+            return n;
+        }
+    }
+
 }
 
-class BinaryNode {
-
-    private final String state;
-    private final boolean answer;
-    private final int n;
-
-    private BinaryNode left, right;
-
-    public BinaryNode(Tree.Node node) {
-        this.state = node.getState();
-        this.answer = node.isAnswer();
-        this.n = node.getN();
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String inOrder() {
-        String s = "";
-        if (left != null) {
-            s += left.inOrder();
-        }
-        s += " , ";
-        System.out.println(state + " , ");
-        if (right != null) {
-            s += right.inOrder();
-        }
-        return s;
-    }
-
-    @Override
-    public String toString() {
-        return state;
-    }
-
-    public boolean isAnswer() {
-        return answer;
-    }
-
-    public BinaryNode getLeft() {
-        return left;
-    }
-
-    public void setLeft(BinaryNode left) {
-        this.left = left;
-    }
-
-    public BinaryNode getRight() {
-        return right;
-    }
-
-    public void setRight(BinaryNode right) {
-        this.right = right;
-    }
-
-    public int getN() {
-        return n;
-    }
-}
 
 
