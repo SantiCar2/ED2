@@ -23,7 +23,7 @@ public class Tree {
     }
 
     public static void main(String[] args) {
-        Tree t = new Tree(0, 0, 0);
+        Tree t = new Tree(2, 6, 2);
 
         t.start();
     }
@@ -50,9 +50,12 @@ public class Tree {
             if (n < limit && set.add(state + "," + fatherState)) {
                 if (!(x == objective || y == objective)) {
                     answer = false;
+
                     createChildren(operation);
                 } else {
                     answer = true;
+                    System.out.println(state);
+                    System.out.println("RESPUESTA!");
                 }
             } else {
                 answer = false;
@@ -60,6 +63,7 @@ public class Tree {
         }
 
         private void createChildren(int operation) {
+
             // createFilledX();
             // createFilledY();
             // createXtoY();
@@ -132,14 +136,14 @@ public class Tree {
 
         private void createFilledX() {
             final int op = 0;
-            if (x != xCapacity) {
+            if (x <= xCapacity) {
                 children.offer(new Node(xCapacity, y, op, state, n + 1));
             }
         }
 
         private void createFilledY() {
             final int op = 1;
-            if (y != yCapacity) {
+            if (y <= yCapacity) {
                 children.offer(new Node(x, yCapacity, op, state, n + 1));
             }
         }
@@ -164,7 +168,7 @@ public class Tree {
             */
             final int tX, tY;
             if (x != 0 && y != yCapacity) {
-                if (y + y >= yCapacity) {
+                if (x + y >= yCapacity) {
                     // (1)
                     tX = x - (yCapacity - y);
                     tY = yCapacity;
