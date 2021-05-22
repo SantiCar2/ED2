@@ -50,12 +50,10 @@ public class Tree {
             if (n < limit && set.add(state + "," + fatherState)) {
                 if (!(x == objective || y == objective)) {
                     answer = false;
-
                     createChildren(operation);
                 } else {
                     answer = true;
                     System.out.println(state);
-                    System.out.println("RESPUESTA!");
                 }
             } else {
                 answer = false;
