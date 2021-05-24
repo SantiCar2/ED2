@@ -1,8 +1,8 @@
-package proyecto;
+package proyecto.oldVer;
 
 import java.util.ArrayList;
 
-import static proyecto.JarraExceptions.*;
+import static proyecto.oldVer.JarraExceptions.*;
 
 
 public class Nodo {
