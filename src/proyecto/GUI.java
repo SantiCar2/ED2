@@ -80,33 +80,26 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 if (!jarra1.getText().isEmpty() && !jarra2.getText().isEmpty() && !objetivo.getText().isEmpty()) {
                     if (jarra1.getText().matches("\\d+") && jarra2.getText().matches("\\d+") && objetivo.getText().matches("\\d+")) {
-                        /*try {
-                            Short jar1 = Short.parseShort(jarra1.getText());
-                            Short jar2 = Short.parseShort(jarra2.getText());
-                            Short objet = Short.parseShort(objetivo.getText());
+                        if(Integer.parseInt(jarra1.getText()) >= Integer.parseInt(jarra2.getText())) {
+                            short jar1 = Short.parseShort(jarra1.getText());
+                            short jar2 = Short.parseShort(jarra2.getText());
+                            short obje = Short.parseShort(objetivo.getText());
 
-                        } catch (NumberFormatException NEx) {
-                            JOptionPane.showMessageDialog(frame, "Los valores ingresados no son validos", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            Tree t = new Tree(obje, jar1, jar2);
+
+                            BinaryTree bt = new BinaryTree(t);
+
+                            getAns(bt);
+
+                            res.setText(ret);
+
+                            ret = "";
+                        }else{
+                            JOptionPane.showMessageDialog(frame, "Para el correcto funcionamiento \n la capacidad de la jarra 1 debe \n ser mayor al de la jarra 2..", "ERROR", JOptionPane.ERROR_MESSAGE);
                             jarra1.setText(null);
                             jarra2.setText(null);
                             objetivo.setText(null);
-                            res.setText(null);
-                        }*/
-
-
-                        short jar1 = Short.parseShort(jarra1.getText());
-                        short jar2 = Short.parseShort(jarra2.getText());
-                        short obje = Short.parseShort(objetivo.getText());
-                        // TODO: Crear arbol y pasar los parametros
-                        Tree t = new Tree(obje, jar1, jar2);
-
-                        BinaryTree bt = new BinaryTree(t);
-
-                        getAns(bt);
-
-                        res.setText(ret);
-
-                        ret = "";
+                        }
 
                     } else {
                         JOptionPane.showMessageDialog(frame, "Los valores ingresados no son N" + (char) 218 + "meros.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -146,7 +139,7 @@ public class GUI {
         ArrayList<BinaryTree.BinaryNode> ans = new ArrayList<BinaryTree.BinaryNode>();
         getAns(bt.getRoot(), ans);
         if (ans.isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "Los valores ingresados no otorgan una respuesta", "", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "Los valores ingresados no otorgan una respuesta.", "", JOptionPane.ERROR_MESSAGE);
         } else {
             for (BinaryTree.BinaryNode bn: ans) {
                 if (bn.getN() < bestN) {
@@ -155,7 +148,7 @@ public class GUI {
                 }
             }
             llenarOp(bestAns, bestAns.getN());
-            ret = ret + "\n" + bestAns.getState() + bestAns.getN();
+            ret = ret + "\n" + bestAns.getState();
         }
     }
 
@@ -182,9 +175,9 @@ public class GUI {
             next = next.getParent();
             System.out.println(next.toString() + next.getN());
             try {
-                if (next.getN() != next.getParent().getN()) {
+                if (next.getN() > next.getParent().getN()) {
                     trueParent = true;
-                    if(next.getN() != bestN) ret = next.getParent().getState() + (next.getParent().getN()) + "\n" + ret;
+                     ret = next.getParent().getState() + "\n" + ret;
                 }
             } catch (Exception e) {
                 trueParent = true;
