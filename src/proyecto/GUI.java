@@ -80,35 +80,28 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 if (!jarra1.getText().isEmpty() && !jarra2.getText().isEmpty() && !objetivo.getText().isEmpty()) {
                     if (jarra1.getText().matches("\\d+") && jarra2.getText().matches("\\d+") && objetivo.getText().matches("\\d+")) {
-                        if(Integer.parseInt(jarra1.getText()) >= Integer.parseInt(jarra2.getText())) {
-                            short jar1 = Short.parseShort(jarra1.getText());
-                            short jar2 = Short.parseShort(jarra2.getText());
-                            short obje = Short.parseShort(objetivo.getText());
+                        short jar1 = Short.parseShort(jarra1.getText());
+                        short jar2 = Short.parseShort(jarra2.getText());
+                        short obje = Short.parseShort(objetivo.getText());
+                        Tree t;
 
-                            Tree t = new Tree(obje, jar1, jar2);
+                        if (jar1 >= jar2) {
 
-                            BinaryTree bt = new BinaryTree(t);
+                            t = new Tree(obje, jar1, jar2);
 
-                            getAns(bt);
+                        } else {
 
-                            res.setText(ret);
+                            t = new Tree(obje, jar2, jar1);
 
-                            ret = "";
-                        }else{
-                            short jar1 = Short.parseShort(jarra1.getText());
-                            short jar2 = Short.parseShort(jarra2.getText());
-                            short obje = Short.parseShort(objetivo.getText());
-
-                            Tree t = new Tree(obje, jar2, jar1);
-
-                            BinaryTree bt = new BinaryTree(t);
-
-                            getAns(bt);
-
-                            res.setText(ret);
-
-                            ret = "";
                         }
+
+                        BinaryTree bt = new BinaryTree(t);
+
+                        getAns(bt);
+
+                        res.setText(ret);
+
+                        ret = "";
 
                     } else {
                         JOptionPane.showMessageDialog(frame, "Los valores ingresados no son N" + (char) 218 + "meros.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -150,7 +143,7 @@ public class GUI {
         if (ans.isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Los valores ingresados no otorgan una respuesta.", "", JOptionPane.ERROR_MESSAGE);
         } else {
-            for (BinaryTree.BinaryNode bn: ans) {
+            for (BinaryTree.BinaryNode bn : ans) {
                 if (bn.getN() < bestN) {
                     bestN = bn.getN();
                     bestAns = bn;
@@ -164,8 +157,8 @@ public class GUI {
     private void getAns(BinaryTree.BinaryNode bn, ArrayList ar) {
         if (bn != null && bn.isAnswer()) {
             ar.add(bn);
-            System.out.println(bn.toString());
-            System.out.println(bn.getN());
+            //System.out.println(bn.toString());
+            //System.out.println(bn.getN());
         }
         if (bn != null) {
             getAns(bn.getRight(), ar);
@@ -182,11 +175,11 @@ public class GUI {
         int cont = 0;
         while (!trueParent && cont < 10) {
             next = next.getParent();
-            System.out.println(next.toString() + next.getN());
+            //System.out.println(next.toString() + next.getN());
             try {
                 if (next.getN() > next.getParent().getN()) {
                     trueParent = true;
-                     ret = next.getParent().getState() + "\n" + ret;
+                    ret = next.getParent().getState() + "\n" + ret;
                 }
             } catch (Exception e) {
                 trueParent = true;
