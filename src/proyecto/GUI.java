@@ -71,7 +71,7 @@ public class GUI {
         JTextArea res = new JTextArea();
         res.setLineWrap(true);
         res.setEditable(false);
-        res.setBounds(12, 140, 461, 344);
+        res.setBounds(12, 140, 461, 600);
         frame.getContentPane().add(res);
 
         JButton calcularBtn = new JButton("Calcular");
@@ -95,10 +95,19 @@ public class GUI {
 
                             ret = "";
                         }else{
-                            JOptionPane.showMessageDialog(frame, "Para el correcto funcionamiento \n la capacidad de la jarra 1 debe \n ser mayor al de la jarra 2..", "ERROR", JOptionPane.ERROR_MESSAGE);
-                            jarra1.setText(null);
-                            jarra2.setText(null);
-                            objetivo.setText(null);
+                            short jar1 = Short.parseShort(jarra1.getText());
+                            short jar2 = Short.parseShort(jarra2.getText());
+                            short obje = Short.parseShort(objetivo.getText());
+
+                            Tree t = new Tree(obje, jar2, jar1);
+
+                            BinaryTree bt = new BinaryTree(t);
+
+                            getAns(bt);
+
+                            res.setText(ret);
+
+                            ret = "";
                         }
 
                     } else {
