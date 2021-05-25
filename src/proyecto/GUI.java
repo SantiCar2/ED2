@@ -112,6 +112,7 @@ public class GUI {
                 } else {
                     JOptionPane.showMessageDialog(frame, "Todos los campos deben estar llenos.", "WARNING", JOptionPane.WARNING_MESSAGE);
                     jarra1.setText(null);
+
                     jarra2.setText(null);
                     objetivo.setText(null);
                 }
