@@ -43,7 +43,7 @@ public class Tree {
 
 
             if (n < limit && set.add(state)) { //state: es para que no se quede en un ciclo haciendo las mismas operaciones
-                if (!(x == objective || y == objective)) { //Evaluar cuando se llegue al objetivo
+                if (!(x == objective || y == objective)) { //Si no es una respuesta
                     answer = false;
                     createChildren(operation); //se crea un hijo
                 } else {
@@ -159,6 +159,8 @@ public class Tree {
             }
             */
             final int tX, tY;
+
+            //X no puede estar vacía y Y no puede estar llena
             if (x != 0 && y != yCapacity) {
                 if (x + y >= yCapacity) { //Se verifica que la capacidad pueda contener a la suma de los dos contenidos
                     // (1)
@@ -190,6 +192,7 @@ public class Tree {
              */
             final int tX, tY;
 
+            //Y no puede estar vacía y X no puede estar llena
             if (y != 0 && x != xCapacity) {
                 if (x + y > xCapacity) { //Se verifica que la capacidad pueda contener a la suma de los dos contenidos
                     // (1)
@@ -207,14 +210,14 @@ public class Tree {
 
         private void createEmptyX() { //Crear la jarra X
             final int op = 4;
-            if (x != 0) {
+            if (x != 0) { //X no puede estar vacía
                 children.offer(new Node(0, y, op, state, n + 1)); //Para crear un hijo en la LinkedList
             }
         }
 
         private void createEmptyY() { //Crear la jarra Y
             final int op = 5;
-            if (y != 0) {
+            if (y != 0) { //Y no puede estar vacía
                 children.offer(new Node(x, 0, op, state, n + 1)); //Para crear un hijo en la LinkedList
             }
         }
