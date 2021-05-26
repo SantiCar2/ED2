@@ -160,7 +160,7 @@ public class Tree {
             */
             final int tX, tY;
             if (x != 0 && y != yCapacity) {
-                if (x + y >= yCapacity) {
+                if (x + y >= yCapacity) { //Se verifica que la capacidad pueda contener a la suma de los dos contenidos
                     // (1)
                     tX = x - (yCapacity - y);
                     tY = yCapacity;
@@ -191,7 +191,7 @@ public class Tree {
             final int tX, tY;
 
             if (y != 0 && x != xCapacity) {
-                if (x + y > xCapacity) {
+                if (x + y > xCapacity) { //Se verifica que la capacidad pueda contener a la suma de los dos contenidos
                     // (1)
                     tX = xCapacity;
                     tY = y - (xCapacity - x);
