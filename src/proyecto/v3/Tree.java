@@ -24,7 +24,7 @@ public class Tree {
 
 
     private void start() {
-        root = new Node(0, 0, -1, "Root", 0, new HashSet<>());
+        root = new Node(0, 0, -1, 0, new HashSet<>());
     }
 
 
@@ -36,7 +36,7 @@ public class Tree {
         private final int x, y;// current 'water' levels
         private final int n;
 
-        public Node(int x, int y, int operation, String fatherState, int n, Set<String> set) {
+        public Node(int x, int y, int operation, int n, Set<String> set) {
             this.x = x;
             this.y = y;
             this.n = n;
@@ -131,14 +131,14 @@ public class Tree {
         private void createFilledX() { //Llenar x
             final int op = 0;
             if (x <= xCapacity) {
-                children.offer(new Node(xCapacity, y, op, state, n + 1, new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
+                children.offer(new Node(xCapacity, y, op, n + 1, new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
         }
 
         private void createFilledY() { //Llenar y
             final int op = 1;
             if (y <= yCapacity) {
-                children.offer(new Node(x, yCapacity, op, state, n + 1,new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
+                children.offer(new Node(x, yCapacity, op, n + 1, new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
         }
 
@@ -174,7 +174,7 @@ public class Tree {
                     tY = y + x;
                 }
 
-                children.offer(new Node(tX, tY, op, state, n + 1,new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
+                children.offer(new Node(tX, tY, op, n + 1, new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
         }
 
@@ -205,7 +205,7 @@ public class Tree {
                     tY = 0;
                     tX = x + y;
                 }
-                children.offer(new Node(tX, tY, op, state, n + 1,new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
+                children.offer(new Node(tX, tY, op, n + 1, new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
 
         }
@@ -213,14 +213,14 @@ public class Tree {
         private void createEmptyX() { //Crear la jarra X
             final int op = 4;
             if (x != 0) { //X no puede estar vacía
-                children.offer(new Node(0, y, op, state, n + 1,new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
+                children.offer(new Node(0, y, op, n + 1, new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
         }
 
         private void createEmptyY() { //Crear la jarra Y
             final int op = 5;
             if (y != 0) { //Y no puede estar vacía
-                children.offer(new Node(x, 0, op, state, n + 1,new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
+                children.offer(new Node(x, 0, op, n + 1, new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
         }
 
