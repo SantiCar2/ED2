@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class Tree {
-    public final Set<String> set = new HashSet<>();
+    //    public final Set<String> set = new HashSet<>();
     public final int objective;
     private final int xCapacity;
     private final int yCapacity;
@@ -17,29 +17,31 @@ public class Tree {
         this.objective = objective;
         this.xCapacity = xCapacity;
         this.yCapacity = yCapacity;
-        this.limit = 2*(xCapacity * yCapacity);
+        this.limit = 2 * (xCapacity * yCapacity);
 
         start();
     }
 
 
     private void start() {
-        root = new Node(0, 0, -1, "Root", 0);
+        root = new Node(0, 0, -1, "Root", 0, new HashSet<>());
     }
 
 
     class Node {
+        private final Set<String> parentSet;
         private final String state;// representation of node
         private final boolean answer;
         private final LinkedList<Node> children = new LinkedList<>();
         private final int x, y;// current 'water' levels
         private final int n;
 
-        public Node(int x, int y, int operation, String fatherState, int n) {
+        public Node(int x, int y, int operation, String fatherState, int n, Set<String> set) {
             this.x = x;
             this.y = y;
             this.n = n;
             this.state = "(" + x + " , " + y + ")";
+            this.parentSet = set;
 
 
             if (n < limit && set.add(state)) { //state: es para que no se quede en un ciclo haciendo las mismas operaciones
@@ -129,14 +131,14 @@ public class Tree {
         private void createFilledX() { //Llenar x
             final int op = 0;
             if (x <= xCapacity) {
-                children.offer(new Node(xCapacity, y, op, state, n + 1)); //Para crear un hijo en la LinkedList
+                children.offer(new Node(xCapacity, y, op, state, n + 1, new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
         }
 
         private void createFilledY() { //Llenar y
             final int op = 1;
             if (y <= yCapacity) {
-                children.offer(new Node(x, yCapacity, op, state, n + 1)); //Para crear un hijo en la LinkedList
+                children.offer(new Node(x, yCapacity, op, state, n + 1,new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
         }
 
@@ -172,7 +174,7 @@ public class Tree {
                     tY = y + x;
                 }
 
-                children.offer(new Node(tX, tY, op, state, n + 1)); //Para crear un hijo en la LinkedList
+                children.offer(new Node(tX, tY, op, state, n + 1,new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
         }
 
@@ -203,7 +205,7 @@ public class Tree {
                     tY = 0;
                     tX = x + y;
                 }
-                children.offer(new Node(tX, tY, op, state, n + 1)); //Para crear un hijo en la LinkedList
+                children.offer(new Node(tX, tY, op, state, n + 1,new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
 
         }
@@ -211,14 +213,14 @@ public class Tree {
         private void createEmptyX() { //Crear la jarra X
             final int op = 4;
             if (x != 0) { //X no puede estar vacía
-                children.offer(new Node(0, y, op, state, n + 1)); //Para crear un hijo en la LinkedList
+                children.offer(new Node(0, y, op, state, n + 1,new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
         }
 
         private void createEmptyY() { //Crear la jarra Y
             final int op = 5;
             if (y != 0) { //Y no puede estar vacía
-                children.offer(new Node(x, 0, op, state, n + 1)); //Para crear un hijo en la LinkedList
+                children.offer(new Node(x, 0, op, state, n + 1,new HashSet<>(parentSet))); //Para crear un hijo en la LinkedList
             }
         }
 
@@ -259,10 +261,6 @@ public class Tree {
         public String toString() {
             return state;
         }
-    }
-
-    public Set<String> getSet() {
-        return set;
     }
 
     public int getObjective() {
