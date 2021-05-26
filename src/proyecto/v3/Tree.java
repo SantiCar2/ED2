@@ -42,16 +42,15 @@ public class Tree {
             this.state = "(" + x + " , " + y + ")";
 
 
-            if (n < limit && set.add(state)) {
-                if (!(x == objective || y == objective)) {
+            if (n < limit && set.add(state)) { //state: es para que no se quede en un ciclo haciendo las mismas operaciones
+                if (!(x == objective || y == objective)) { //Evaluar cuando se llegue al objetivo
                     answer = false;
-
-                    createChildren(operation);
+                    createChildren(operation); //se crea un hijo
                 } else {
                     answer = true;
                 }
             } else {
-                answer = false;
+                answer = false; //Si no se logró llegar al objetivo
             }
         }
 
@@ -126,22 +125,22 @@ public class Tree {
             }
         }
 
-
-        private void createFilledX() {
+        //OPERACIONES
+        private void createFilledX() { //Llenar x
             final int op = 0;
             if (x <= xCapacity) {
-                children.offer(new Node(xCapacity, y, op, state, n + 1));
+                children.offer(new Node(xCapacity, y, op, state, n + 1)); //Para crear un hijo en la LinkedList
             }
         }
 
-        private void createFilledY() {
+        private void createFilledY() { //Llenar y
             final int op = 1;
             if (y <= yCapacity) {
-                children.offer(new Node(x, yCapacity, op, state, n + 1));
+                children.offer(new Node(x, yCapacity, op, state, n + 1)); //Para crear un hijo en la LinkedList
             }
         }
 
-        private void createXtoY() {
+        private void createXtoY() { // De x a y
             final int op = 2;
             // x - d >= 0
             // y + d <= Cy
@@ -171,11 +170,11 @@ public class Tree {
                     tY = y + x;
                 }
 
-                children.offer(new Node(tX, tY, op, state, n + 1));
+                children.offer(new Node(tX, tY, op, state, n + 1)); //Para crear un hijo en la LinkedList
             }
         }
 
-        private void createYtoX() {
+        private void createYtoX() { //De Y a X
             final int op = 3;
             // x + d <= Cx
             // y - d >= 0
@@ -201,22 +200,22 @@ public class Tree {
                     tY = 0;
                     tX = x + y;
                 }
-                children.offer(new Node(tX, tY, op, state, n + 1));
+                children.offer(new Node(tX, tY, op, state, n + 1)); //Para crear un hijo en la LinkedList
             }
 
         }
 
-        private void createEmptyX() {
+        private void createEmptyX() { //Crear la jarra X
             final int op = 4;
             if (x != 0) {
-                children.offer(new Node(0, y, op, state, n + 1));
+                children.offer(new Node(0, y, op, state, n + 1)); //Para crear un hijo en la LinkedList
             }
         }
 
-        private void createEmptyY() {
+        private void createEmptyY() { //Crear la jarra Y
             final int op = 5;
             if (y != 0) {
-                children.offer(new Node(x, 0, op, state, n + 1));
+                children.offer(new Node(x, 0, op, state, n + 1)); //Para crear un hijo en la LinkedList
             }
         }
 
