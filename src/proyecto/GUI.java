@@ -11,6 +11,11 @@ import java.util.ArrayList;
 
 public class GUI {
 
+    /**
+     *  Nos tocó la solución del famoso "problema de las jarras" usando arboles n-arios y pasándolos a binarios.
+     */
+
+
     private JFrame frame;
     private JTextField jarra1;
     private JTextField jarra2;
@@ -80,6 +85,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 if (!jarra1.getText().isEmpty() && !jarra2.getText().isEmpty() && !objetivo.getText().isEmpty()) {
                     if (jarra1.getText().matches("\\d+") && jarra2.getText().matches("\\d+") && objetivo.getText().matches("\\d+")) {
+                            // El \d+ se usa para poder discriminar los números de las letras
                         short jar1 = Short.parseShort(jarra1.getText());
                         short jar2 = Short.parseShort(jarra2.getText());
                         short obje = Short.parseShort(objetivo.getText());
@@ -139,27 +145,25 @@ public class GUI {
     private void getAns(BinaryTree bt) {
         int bestN = 2147483647;
         BinaryTree.BinaryNode bestAns = null;
-        ArrayList<BinaryTree.BinaryNode> ans = new ArrayList<BinaryTree.BinaryNode>();
-        getAns(bt.getRoot(), ans);
-        if (ans.isEmpty()) {
+        ArrayList<BinaryTree.BinaryNode> ans = new ArrayList<BinaryTree.BinaryNode>(); //ArrayList de respuestas
+        getAns(bt.getRoot(), ans);  //El método que se invoca, es para poder obtener las respuestas que están dentro del árbol.
+        if (ans.isEmpty()) { //Verifica si hay respuestas.
             JOptionPane.showMessageDialog(frame, "Los valores ingresados no otorgan una respuesta.", "", JOptionPane.ERROR_MESSAGE);
         } else {
-            for (BinaryTree.BinaryNode bn : ans) {
+            for (BinaryTree.BinaryNode bn : ans) { //Separa la respuesta que tenga menos pasos (la mejor)
                 if (bn.getN() < bestN) {
                     bestN = bn.getN();
                     bestAns = bn;
                 }
             }
-            llenarOp(bestAns, bestAns.getN());
+            llenarOp(bestAns, bestAns.getN()); //Se llena el String ¨ret¨con los pasos para poder llegar a la mejor respuesta
             ret = ret + "\n" + bestAns.getState();
         }
     }
 
     private void getAns(BinaryTree.BinaryNode bn, ArrayList ar) {
-        if (bn != null && bn.isAnswer()) {
+        if (bn != null && bn.isAnswer()) { //Se recorre el árbol en su totalidad buscando la respuesta
             ar.add(bn);
-            //System.out.println(bn.toString());
-            //System.out.println(bn.getN());
         }
         if (bn != null) {
             getAns(bn.getRight(), ar);
@@ -168,27 +172,26 @@ public class GUI {
     }
 
     private void llenarOp(BinaryTree.BinaryNode node, int bestN) {
-        if (node.getParent() == null) {
+        if (node.getParent() == null) { //Condición de parada.
             return;
         }
-        BinaryTree.BinaryNode next = node;
+        BinaryTree.BinaryNode next = node; // Se declara el un nodo temporal
         boolean trueParent = false;
         int cont = 0;
-        while (!trueParent && cont < 10) {
+        while (!trueParent && cont < 10) { // Sale del ciclo hasta que se esté seguro que el nodo que sigue es el verdadero padre (en el árbol n-ario)
             next = next.getParent();
-            //System.out.println(next.toString() + next.getN());
             try {
-                if (next.getN() > next.getParent().getN()) {
+                if (next.getN() > next.getParent().getN()) { //Se compara el número de pasos del padre del nodo para ver si este disminuye
                     trueParent = true;
                     ret = next.getParent().getState() + "\n" + ret;
                 }
-            } catch (Exception e) {
+            } catch (Exception e) { //En el caso de llegar a la raíz sale un NullPointer, esto evita que el código pare.
                 trueParent = true;
             }
 
             cont++;
         }
-        llenarOp(next, bestN);
+        llenarOp(next, bestN); // Se repite hasta llegar a la raíz del árbol.
 
     }
 
